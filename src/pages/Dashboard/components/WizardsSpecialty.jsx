@@ -1,87 +1,117 @@
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-} from "recharts";
-
-const chartData = [
-  { name: "Alchemists", value: 45, color: "#D0BCFF" },
-  { name: "Transmuters", value: 30, color: "#FFB84D" },
-  { name: "Conjurers", value: 25, color: "#C9D2E4" },
+const specialtyData = [
+  { name: "Alchemists", value: 45, color: "#C4B5FD" },
+  { name: "Transmuters", value: 30, color: "#F59E0B" },
+  { name: "Conjurers", value: 25, color: "#94A3B8" },
 ];
 
+const TOTAL = 1200;
+const RADIUS = 70;
+const STROKE = 13;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
 export default function WizardsSpecialty() {
+  let cumulative = 0;
+
   return (
-    <div className="rounded-2xl border border-[#1A2942] bg-[#071321] p-6">
-      <h2 className="mb-6 text-[20px] font-medium text-[#DDE6F5]">
+    <div
+      style={{
+        background: "#071321",
+        border: "1px solid #1A2942",
+        borderRadius: 16,
+        padding: "24px",
+      }}
+    >
+      <h2
+        style={{
+          color: "#DDE6F5",
+          fontSize: 18,
+          fontWeight: 500,
+          margin: "0 0 20px",
+        }}
+      >
         Wizards by Specialty
       </h2>
 
-      <div className="h-[220px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={chartData}
-              dataKey="value"
-              cx="50%"
-              cy="50%"
-              innerRadius={70}
-              outerRadius={82}
-              paddingAngle={2}
-              stroke="none"
-            >
-              {chartData.map((entry) => (
-                <Cell key={entry.name} fill={entry.color} />
-              ))}
-            </Pie>
+      {/* Donut chart using SVG for precision */}
+      <div
+        style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}
+      >
+        <svg width={170} height={170} viewBox="0 0 170 170">
+          {/* Background ring */}
+          <circle
+            cx={85}
+            cy={85}
+            r={RADIUS}
+            fill="none"
+            stroke="#1A2942"
+            strokeWidth={STROKE}
+          />
 
-            <text
-              x="50%"
-              y="48%"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill="#DDE6F5"
-              fontSize="28"
-              fontWeight="600"
-              fontFamily="Manrope, sans-serif"
-            >
-              1.2k
-            </text>
+          {/* Colored segments */}
+          {specialtyData.map((seg, i) => {
+            const pct = seg.value / 100;
+            const dashLen = pct * CIRCUMFERENCE;
+            const offset = cumulative * CIRCUMFERENCE;
+            cumulative += pct;
+            return (
+              <circle
+                key={i}
+                cx={85}
+                cy={85}
+                r={RADIUS}
+                fill="none"
+                stroke={seg.color}
+                strokeWidth={STROKE}
+                strokeDasharray={`${dashLen} ${CIRCUMFERENCE - dashLen}`}
+                strokeDashoffset={-offset + CIRCUMFERENCE * 0.25}
+                style={{ transition: "stroke-dasharray 0.5s" }}
+              />
+            );
+          })}
 
-            <text
-              x="50%"
-              y="58%"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill="#9AA4B4"
-              fontSize="12"
-              fontFamily="Manrope, sans-serif"
-            >
-              Total
-            </text>
-          </PieChart>
-        </ResponsiveContainer>
+          {/* Center text */}
+          <text
+            x={85}
+            y={79}
+            textAnchor="middle"
+            fill="#DDE6F5"
+            fontSize={26}
+            fontWeight={600}
+          >
+            1.2k
+          </text>
+          <text x={85} y={97} textAnchor="middle" fill="#6B7A8F" fontSize={12}>
+            Total
+          </text>
+        </svg>
       </div>
 
-      <div className="mt-4 space-y-3">
-        {chartData.map((item) => (
+      {/* Legend */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {specialtyData.map((item) => (
           <div
             key={item.name}
-            className="flex items-center justify-between"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
           >
-            <div className="flex items-center gap-2">
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div
-                className="h-2.5 w-2.5 rounded-full"
-                style={{ backgroundColor: item.color }}
+                style={{
+                  width: 9,
+                  height: 9,
+                  borderRadius: "50%",
+                  background: item.color,
+                  flexShrink: 0,
+                }}
               />
-
-              <span className="text-sm text-[#DDE6F5]">
+              <span style={{ color: "#DDE6F5", fontSize: 13 }}>
                 {item.name}
               </span>
             </div>
-
-            <span className="text-sm text-[#DDE6F5]">
+            <span style={{ color: "#DDE6F5", fontSize: 13 }}>
               {item.value}%
             </span>
           </div>

@@ -1,9 +1,8 @@
 import React from "react";
-import { TrendingUp, FlaskConical, AlertTriangle } from "lucide-react";
-import Card from "./components/Card";
 import RegistryActivity from "./components/RegistryActivity";
 import WizardsSpecialty from "./components/WizardsSpecialty";
 import MasterWizardRegistry from "./components/Table";
+import CardList from "./components/CardList";
 export default function Dashboard() {
   return (
     <>
@@ -15,33 +14,8 @@ export default function Dashboard() {
           Overseeing the mystical equilibrium across all magical realms.
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-6 px-4 sm:px-6 lg:px-10 py-4 md:grid-cols-3">
-        <Card
-          title="Total Registered Wizards"
-          count="1,248"
-          icon={TrendingUp}
-          desc="+ 4.5% from last moon"
-          countColor="text-[#D0BCFF]"
-        />
-
-        <Card
-          title="Active Elixirs"
-          count="856"
-          countColor="text-[#FFB95F]"
-          icon={FlaskConical}
-          desc="24 new formulas registered"
-        />
-
-        <Card
-          title="Pending Verifications"
-          count="12"
-          countColor="text-[#FFB4AB]"
-          icon={AlertTriangle}
-          desc="Requires High-Council approval"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-10  ">
+      <CardList/>
+      <div className="grid grid-cols-1  md:grid-cols-[2fr_1fr] gap-6 px-4 sm:px-6 lg:px-10  ">
         <RegistryActivity />
         <WizardsSpecialty />
       </div>

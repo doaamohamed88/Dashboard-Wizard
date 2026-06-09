@@ -70,72 +70,72 @@ export default function MasterWizardRegistry() {
 
       {/* Table */}
       <div className="overflow-x-auto">
-      <table className="w-full min-w-[640px]">
-        <thead>
-          <tr className="border-b border-[#1D2A38] bg-[#0C1B2C] text-left">
-            <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
-              ID
-            </th>
+        <table className="w-full min-w-[640px]">
+          <thead>
+            <tr className="border-b border-[#1D2A38] bg-[#0C1B2C] text-left">
+              <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
+                ID
+              </th>
 
-            <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
-              First Name
-            </th>
+              <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
+                First Name
+              </th>
 
-            <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
-              Last Name
-            </th>
+              <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
+                Last Name
+              </th>
 
-            <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
-              Associated Elixirs
-            </th>
+              <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
+                Associated Elixirs
+              </th>
 
-            <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
-              Actions
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((wizard) => (
-            <tr
-              key={wizard.id}
-              className="border-b border-[#112030] hover:bg-[#091827]"
-            >
-              <td className="px-6 py-5 text-[#C8D0D8]">{wizard.id}</td>
-
-              <td className="px-6 py-5 text-[#E6EAF0]">{wizard.firstName}</td>
-
-              <td className="px-6 py-5 text-[#E6EAF0]">{wizard.lastName}</td>
-
-              <td className="px-6 py-5">
-                <div className="flex flex-wrap gap-2">
-                  {wizard.elixirs.length ? (
-                    wizard.elixirs.map((elixir) => (
-                      <span
-                        key={elixir}
-                        className="rounded-full border border-[#7A5D27] bg-[#2B2111] px-3 py-1 text-sm text-[#FFB95F]"
-                      >
-                        {elixir}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-[#677484]">None registered</span>
-                  )}
-                </div>
-              </td>
-
-              <td className="px-6 py-5">
-                <button>
-                  <Eye
-                    onClick={() => setOpenWizard(true)}
-                    className="cursor-pointer"
-                  />
-                </button>
-              </td>
+              <th className="px-6 py-5 text-xs font-medium uppercase text-[#9AA4B2]">
+                Actions
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {data.map((wizard) => (
+              <tr
+                key={wizard.id}
+                className="border-b border-[#112030] hover:bg-[#091827]"
+              >
+                <td className="px-6 py-5 text-[#C8D0D8]">{wizard.id}</td>
+
+                <td className="px-6 py-5 text-[#E6EAF0]">{wizard.firstName}</td>
+
+                <td className="px-6 py-5 text-[#E6EAF0]">{wizard.lastName}</td>
+
+                <td className="px-6 py-5">
+                  <div className="flex flex-wrap gap-2">
+                    {wizard.elixirs.length ? (
+                      wizard.elixirs.map((elixir) => (
+                        <span
+                          key={elixir}
+                          className="rounded-full border border-[#7A5D27] bg-[#2B2111] px-3 py-1 text-sm text-[#FFB95F]"
+                        >
+                          {elixir}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-[#677484]">None registered</span>
+                    )}
+                  </div>
+                </td>
+
+                <td className="px-6 py-5">
+                  <button>
+                    <Eye
+                      onClick={() => setOpenWizard(true)}
+                      className="cursor-pointer"
+                    />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Footer */}
@@ -160,12 +160,7 @@ export default function MasterWizardRegistry() {
           </button>
         </div>
       </div>
-                <WizardDetailsModal
-            open={openWizard}
-            onOpenChange={setOpenWizard}
-          />
-
+      <WizardDetailsModal open={openWizard} onOpenChange={setOpenWizard} />
     </div>
-    
   );
 }

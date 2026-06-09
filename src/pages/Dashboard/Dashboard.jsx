@@ -1,8 +1,8 @@
 import React from "react";
 import RegistryActivity from "./components/RegistryActivity";
 import WizardsSpecialty from "./components/WizardsSpecialty";
-import MasterWizardRegistry from "./components/Table";
 import CardList from "./components/CardList";
+import MasterWizardRegistry from "./components/MasterWizardRegistry";
 export default function Dashboard() {
   return (
     <>
